@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
         static void Main()
         {
             //Parameters
-            int numberOfGens= 300;
+            int numberOfGens= 250;
 
 
             //Initial Pop setup
