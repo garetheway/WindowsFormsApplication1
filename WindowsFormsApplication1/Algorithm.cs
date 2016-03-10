@@ -11,7 +11,10 @@ namespace WindowsFormsApplication1
         // Threshold for crossover. If above this, one action occurs if not something else.
         private static readonly int _crossoverthresehold = 13;
         // Probability for an individual to mutate.
-        private static readonly double _mutationThresehold = 0.27;
+        private static readonly double _mutationSwapThreshold = 0.17;
+        private static readonly double _mutationInversionThresholdLow = 0.42;
+        private static readonly double _mutationInversionThresholdHigh = 0.59;
+        private static readonly double _mutationScrambleThreshold = 0.83;
         // Variable to dictate if the fittest individual should be carried forward to the next generation. 
         // If set to true, the variable is carried forward.
         private static bool usingElitism = false;
@@ -92,11 +95,40 @@ namespace WindowsFormsApplication1
         {
             // Create a random number between 0.0 and 1.0 that is the active probability.
             var mutationprobablily = RandomGenerator.NextDouble();
+            // Declare where we should start the scramble / inversion.
+            var randstart = RandomGenerator.Next(10);
+            // Select how long we should scramble / invert based on a random number generated from the length of the
+            // individual - randstart.
+            var randlength = RandomGenerator.Next(ind.getLength() - randstart);
+            // Declare new array for putting our selected genes in.
+            var scrambleselect = new int[randlength];
 
-
-            if (mutationprobablily < _mutationThresehold)
+            // If the random number is above the threshold for SCRAMBLE mutation.
+            if(mutationprobablily > _mutationScrambleThreshold)
             {
+                // Copy the selected genes in to the array ready to be scrambled.
+                Array.Copy(ind.getGenes(), randstart, scrambleselect, 0, randlength);
+                // Scramble the array in to a new array...
+                int[] scrambled = scrambleselect.OrderBy(x => RandomGenerator.Next()).ToArray();
+                // Copy the scrambled genes back in to the original individual.
+                Array.Copy(scrambled, 0, ind.getGenes(), randstart, randlength);
+            }
 
+            // If the random number is larger than the threshold SWAP mutation, and below the threshold for INVERSION mutation.
+            else if(mutationprobablily > _mutationInversionThresholdLow && mutationprobablily < _mutationInversionThresholdHigh)
+            {
+                // Copy the selected genes in to the array ready to be scrambled.
+                Array.Copy(ind.getGenes(), randstart, scrambleselect, 0, randlength);
+                // Scramble the array in to a new array...
+                Array.Reverse(scrambleselect);
+                // Copy the scrambled genes back in to the original individual.
+                Array.Copy(scrambleselect, 0, ind.getGenes(), randstart, randlength);
+                Console.ReadLine();
+            }
+
+            // If the random number is below the threshold for the SWAP mutation.
+            else if (mutationprobablily < _mutationSwapThreshold)
+            {
                 var rand1 = RandomGenerator.Next(10);
                 var rand2 = RandomGenerator.Next(10);
  
@@ -104,10 +136,11 @@ namespace WindowsFormsApplication1
                 var element2 = ind.getGene(rand2);
                 ind.setGene(rand1, element2);
                 ind.setGene(rand2, element1);
-   
             }
 
             return ind;
         }
+
+
     }
 }
