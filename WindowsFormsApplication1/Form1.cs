@@ -12,9 +12,21 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(Population pop, WorkOrderCollection workOrders)
         {
             InitializeComponent();
+
+            // Work order IDS
+            foreach (int myInt in pop.ProdLine1)
+            {
+                prodLine1txt.AppendText(workOrders.orders[myInt].WorkOrderID.ToString() + "\t");
+            }
+
+            foreach (int myInt in pop.ProdLine2)
+            {
+                prodLine2txt.AppendText(workOrders.orders[myInt].WorkOrderID.ToString() + "\t");
+            }
+
         }
     }
 }

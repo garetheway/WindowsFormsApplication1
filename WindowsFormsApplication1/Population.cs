@@ -12,6 +12,8 @@ namespace WindowsFormsApplication1
         Fitness fitcalc = new Fitness();
         List<Individual> individuals = new List<Individual>(popsize);
         static int generation;
+        public List<int> ProdLine1 = new List<int>();
+        public List<int> ProdLine2 = new List<int>();
 
         public Population()
         {
@@ -74,8 +76,6 @@ namespace WindowsFormsApplication1
             Individual fittestIndividual = individuals.ElementAt(0);
 
             // Set up two new lists to serve as the production lines to allocate to. For each new production line, declare it here.
-            List<int> ProdLine1 = new List<int>();
-            List<int> ProdLine2 = new List<int>();
 
             // Allocate to the production lines on a greedy basis of odd numbers to the first line, even numbers to the second.
             for (int i = 0; i < fittestIndividual.getLength(); i++)

@@ -6,3 +6,4 @@ C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\Wind
 C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
 C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
