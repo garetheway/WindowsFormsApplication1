@@ -35,8 +35,9 @@ namespace WindowsFormsApplication1
                 pop.EvaluateFitness(workOrders.orders);
                 pop.PrintPopulation();
             }
+            
 
-            pop.PrintWorkOrders(workOrders.orders);
+            pop.AllocateLines(workOrders.orders);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
