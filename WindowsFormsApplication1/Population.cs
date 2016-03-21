@@ -49,14 +49,6 @@ namespace WindowsFormsApplication1
         // Print the list of individuals each generation along with the fitness rating and the generation.
         public void PrintPopulation()
         {
-            //for (int index = 0; index < individuals.Count; index++)
-            //{
-            //var ind = individuals[index];
-            //for (int i = 0; i < ind.getLength(); i++)
-            //{
-            //   Console.Write(ind.getGene(i));
-            //}
-
             individuals.Sort();
             Individual fittestIndividual = individuals.ElementAt(0);
             for (int i = 0; i < fittestIndividual.getLength(); i++)
