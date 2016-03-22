@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblProdLine1 = new System.Windows.Forms.Label();
+            this.lblProdLine2 = new System.Windows.Forms.Label();
             this.scheduleDatabaseDataSet = new WindowsFormsApplication1.ScheduleDatabaseDataSet();
             this.scheduleDatabaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.workOrdersBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -38,31 +38,38 @@
             this.tableAdapterManager = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager();
             this.lblSwinprod = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnAddNew = new System.Windows.Forms.Button();
+            this.pnlBottom = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).BeginInit();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label2
+            // lblProdLine1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 178);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "PRODUCTION LINE 1";
+            this.lblProdLine1.AutoSize = true;
+            this.lblProdLine1.BackColor = System.Drawing.Color.Transparent;
+            this.lblProdLine1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProdLine1.ForeColor = System.Drawing.Color.White;
+            this.lblProdLine1.Location = new System.Drawing.Point(2, 178);
+            this.lblProdLine1.Name = "lblProdLine1";
+            this.lblProdLine1.Size = new System.Drawing.Size(117, 15);
+            this.lblProdLine1.TabIndex = 3;
+            this.lblProdLine1.Text = "PRODUCTION LINE 1";
             // 
-            // label1
+            // lblProdLine2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(2, 298);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "PRODUCTION LINE 2";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblProdLine2.AutoSize = true;
+            this.lblProdLine2.BackColor = System.Drawing.Color.Transparent;
+            this.lblProdLine2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProdLine2.ForeColor = System.Drawing.Color.White;
+            this.lblProdLine2.Location = new System.Drawing.Point(2, 298);
+            this.lblProdLine2.Name = "lblProdLine2";
+            this.lblProdLine2.Size = new System.Drawing.Size(117, 15);
+            this.lblProdLine2.TabIndex = 4;
+            this.lblProdLine2.Text = "PRODUCTION LINE 2";
+            this.lblProdLine2.Click += new System.EventHandler(this.label1_Click);
             // 
             // scheduleDatabaseDataSet
             // 
@@ -104,26 +111,48 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.btnAddNew);
             this.panelTop.Location = new System.Drawing.Point(-7, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1507, 166);
+            this.panelTop.Size = new System.Drawing.Size(1935, 166);
             this.panelTop.TabIndex = 6;
+            // 
+            // btnAddNew
+            // 
+            this.btnAddNew.BackColor = System.Drawing.Color.White;
+            this.btnAddNew.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddNew.Location = new System.Drawing.Point(1548, 5);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(194, 30);
+            this.btnAddNew.TabIndex = 0;
+            this.btnAddNew.Text = "Add New Work Order";
+            this.btnAddNew.UseVisualStyleBackColor = false;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            // 
+            // pnlBottom
+            // 
+            this.pnlBottom.Location = new System.Drawing.Point(0, 166);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(1928, 889);
+            this.pnlBottom.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 506);
+            this.ClientSize = new System.Drawing.Size(1904, 1042);
             this.Controls.Add(this.lblSwinprod);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblProdLine2);
+            this.Controls.Add(this.lblProdLine1);
             this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.pnlBottom);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SWINDON PRODUCTION SCHEDULE";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).EndInit();
+            this.panelTop.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,8 +160,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblProdLine1;
+        private System.Windows.Forms.Label lblProdLine2;
         private System.Windows.Forms.BindingSource scheduleDatabaseDataSetBindingSource;
         private ScheduleDatabaseDataSet scheduleDatabaseDataSet;
         private System.Windows.Forms.BindingSource workOrdersBindingSource;
@@ -140,6 +169,8 @@
         private ScheduleDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.Label lblSwinprod;
         private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Button btnAddNew;
+        private System.Windows.Forms.Panel pnlBottom;
 
 
 

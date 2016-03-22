@@ -71,7 +71,7 @@ namespace WindowsFormsApplication1
             // Delcare our child.
             var child = new int[parent1.getLength()];
             // Generate a number between 1 and 10.
-            var crossrand = RandomGenerator.Next(10);
+            var crossrand = RandomGenerator.Next(parent1.getLength());
             // Copies genes from the first parent, to the child, starting at position 'rand'. 
             Array.Copy(parent1.getGenes(), child, crossrand);
 
@@ -96,7 +96,7 @@ namespace WindowsFormsApplication1
             // Create a random number between 0.0 and 1.0 that is the active probability.
             var mutationprobablily = RandomGenerator.NextDouble();
             // Declare where we should start the scramble / inversion.
-            var randstart = RandomGenerator.Next(10);
+            var randstart = RandomGenerator.Next(ind.getLength());
             // Select how long we should scramble / invert based on a random number generated from the length of the
             // individual - randstart.
             var randlength = RandomGenerator.Next(ind.getLength() - randstart);

@@ -25,17 +25,18 @@ namespace WindowsFormsApplication1
         // Generates our initial population.
         public void GenerateRandomPopulation(List<WorkOrder> workOrders)
         {
-           
+            // Calculate the number of orders that exist that need to be scheduled.
             int workordernum = workOrders.Count;
+            // Set the length of an individual to be equal to the number of orders to schedule.
             ind.setLength(workordernum);
-            // These lines add the individual object to the list of individuals.
-            int [] numbers = new int[ind.getLength()];
+            // Declare an integer array to hold the possible values that make up our permutation.
+            int[] numbers = new int[ind.getLength()];
+            // Fill the integer array with the values to that are used within the permutation.
             for (int num = 0; num < numbers.Length; num++)
             {
                 numbers[num] = num;
             }
-
-            // NOT GENERATING PERMUTATION
+            // Using the values generated, randomly distribute them within an array to use as an individual. 
             for (int k = 0; k < popsize; k++)
             {
                 int[] genes = numbers.OrderBy(x => RandomGenerator.Next()).ToArray();

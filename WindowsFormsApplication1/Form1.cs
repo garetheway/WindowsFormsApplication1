@@ -17,7 +17,10 @@ namespace WindowsFormsApplication1
         {
             this.workOrdersTableAdapter.Fill(this.scheduleDatabaseDataSet.WorkOrders);
             panelTop.BackColor = Color.FromArgb(73, 129, 161);      
-            lblSwinprod.BackColor = Color.FromArgb(73, 129, 161);      
+            pnlBottom.BackColor = Color.FromArgb(0, 14, 60);      
+            lblSwinprod.BackColor = Color.FromArgb(73, 129, 161);
+            lblProdLine1.BackColor = Color.FromArgb(0, 14, 60);     
+            lblProdLine2.BackColor = Color.FromArgb(0, 14, 60);     
         }
        
         public Form1(Population pop, WorkOrderCollection workOrders)
@@ -114,7 +117,7 @@ namespace WindowsFormsApplication1
                         }
                         break;
                     }
-
+                    wo.BringToFront();
                     wo = null;
                 }
             }
@@ -150,9 +153,15 @@ namespace WindowsFormsApplication1
                         }
                         break;
                     }
-
+                    wo.BringToFront();
                     wo = null;
                 }
+
+                btnAddNew.MouseHover += new EventHandler(btnAddNew_Hover);
+                btnAddNew.MouseLeave += new EventHandler(btnAddNew_Leave);
+
+                
+
             }
         }
 
@@ -165,5 +174,23 @@ namespace WindowsFormsApplication1
         {
 
         }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            frmAddWorkOrder newwrkorderFrm = new frmAddWorkOrder();
+            newwrkorderFrm.Show();
+        }
+
+        private void btnAddNew_Hover(object sender, EventArgs e)
+        {
+            btnAddNew.BackColor = Color.SkyBlue;
+        }
+
+        private void btnAddNew_Leave(object sender, EventArgs e)
+        {
+            btnAddNew.BackColor = Color.White;
+        }
+
+
     }
 }
