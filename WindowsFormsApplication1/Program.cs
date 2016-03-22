@@ -19,13 +19,15 @@ namespace WindowsFormsApplication1
 
 
             //Initial Pop setup
-            var pop = new Population();
             var workOrders = new WorkOrderCollection();
-
-            pop.GenerateRandomPopulation();
             workOrders.AssociateWorkOrders();
+            var pop = new Population();
+            
+
+            pop.GenerateRandomPopulation(workOrders.orders);
+            
             pop.EvaluateFitness(workOrders.orders);
-            pop.PrintPopulation();
+            //pop.PrintPopulation();
 
 
             //Evolution
@@ -33,7 +35,7 @@ namespace WindowsFormsApplication1
 			{
                 pop = Algorithm.EvolvePopulation(pop);
                 pop.EvaluateFitness(workOrders.orders);
-                pop.PrintPopulation();
+                //pop.PrintPopulation();
             }
             
 

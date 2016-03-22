@@ -8,8 +8,10 @@ namespace WindowsFormsApplication1
 {
     public class Population
     {
-        static int popsize = 20;
+        static int popsize = 50;
         Fitness fitcalc = new Fitness();
+        Individual ind = new Individual();
+        private static readonly Random RandomGenerator = new Random();
         List<Individual> individuals = new List<Individual>(popsize);
         static int generation;
         public List<int> ProdLine1 = new List<int>();
@@ -21,29 +23,24 @@ namespace WindowsFormsApplication1
         }
 
         // Generates our initial population.
-        public void GenerateRandomPopulation()
+        public void GenerateRandomPopulation(List<WorkOrder> workOrders)
         {
+           
+            int workordernum = workOrders.Count;
+            ind.setLength(workordernum);
             // These lines add the individual object to the list of individuals.
-            individuals.Add(new Individual(new int[] {2, 1, 9, 3, 5, 4, 7, 6, 8, 0}));
-            individuals.Add(new Individual(new int[] {0, 2, 1, 4, 5, 9, 8, 7, 3, 6}));
-            individuals.Add(new Individual(new int[] {5, 2, 3, 4, 1, 8, 7, 6, 0, 9}));
-            individuals.Add(new Individual(new int[] {9, 2, 4, 7, 1, 5, 8, 0, 3, 6}));
-            individuals.Add(new Individual(new int[] {9, 1, 2, 8, 0, 7, 3, 4, 6, 5}));
-            individuals.Add(new Individual(new int[] {2, 1, 3, 9, 4, 5, 6, 8, 7, 0}));
-            individuals.Add(new Individual(new int[] {3, 2, 1, 4, 5, 7, 6, 9, 8, 0}));
-            individuals.Add(new Individual(new int[] {5, 2, 3, 4, 1, 8, 7, 6, 0, 9}));
-            individuals.Add(new Individual(new int[] {9, 2, 4, 7, 1, 5, 8, 0, 3, 6}));
-            individuals.Add(new Individual(new int[] {9, 1, 2, 8, 0, 7, 3, 4, 6, 5}));
-            individuals.Add(new Individual(new int[] {2, 1, 9, 3, 5, 4, 7, 6, 8, 0}));
-            individuals.Add(new Individual(new int[] {0, 2, 1, 4, 5, 9, 8, 7, 3, 6}));
-            individuals.Add(new Individual(new int[] {5, 2, 3, 4, 1, 8, 7, 6, 0, 9}));
-            individuals.Add(new Individual(new int[] {9, 2, 4, 7, 1, 5, 8, 0, 3, 6}));
-            individuals.Add(new Individual(new int[] {9, 1, 2, 8, 0, 7, 3, 4, 6, 5}));
-            individuals.Add(new Individual(new int[] {2, 1, 9, 3, 5, 4, 7, 6, 8, 0}));
-            individuals.Add(new Individual(new int[] {0, 2, 1, 4, 5, 9, 8, 7, 3, 6}));
-            individuals.Add(new Individual(new int[] {5, 2, 3, 4, 1, 8, 7, 6, 0, 9}));
-            individuals.Add(new Individual(new int[] {0, 2, 4, 6, 8, 1, 3, 5, 7, 9}));
-            individuals.Add(new Individual(new int[] {0, 9, 8, 7, 6, 5, 4, 3, 2, 1}));
+            int [] numbers = new int[ind.getLength()];
+            for (int num = 0; num < numbers.Length; num++)
+            {
+                numbers[num] = num;
+            }
+
+            // NOT GENERATING PERMUTATION
+            for (int k = 0; k < popsize; k++)
+            {
+                int[] genes = numbers.OrderBy(x => RandomGenerator.Next()).ToArray();
+                individuals.Add(new Individual(genes));
+            }
         }
 
         // Print the list of individuals each generation along with the fitness rating and the generation.

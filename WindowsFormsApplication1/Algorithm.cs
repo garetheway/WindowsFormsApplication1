@@ -69,7 +69,7 @@ namespace WindowsFormsApplication1
         private static Individual Applycrossover(Individual parent1, Individual parent2)
         {
             // Delcare our child.
-            var child = new int[10];
+            var child = new int[parent1.getLength()];
             // Generate a number between 1 and 10.
             var crossrand = RandomGenerator.Next(10);
             // Copies genes from the first parent, to the child, starting at position 'rand'. 
@@ -129,8 +129,8 @@ namespace WindowsFormsApplication1
             // If the random number is below the threshold for the SWAP mutation.
             else if (mutationprobablily < _mutationSwapThreshold)
             {
-                var rand1 = RandomGenerator.Next(10);
-                var rand2 = RandomGenerator.Next(10);
+                var rand1 = RandomGenerator.Next(ind.getLength());
+                var rand2 = RandomGenerator.Next(ind.getLength());
  
                 var element1 = ind.getGene(rand1);
                 var element2 = ind.getGene(rand2);

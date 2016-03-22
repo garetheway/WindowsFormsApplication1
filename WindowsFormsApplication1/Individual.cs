@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Data;
 
 namespace WindowsFormsApplication1
 {
     public class Individual : IComparable
     {
-        private static readonly int genelength = 10;
+        private static int genelength = 11;
         private float fitness;
-        private readonly int[] genes = new int[genelength];
-
+        private  int[] genes = new int[genelength];
+        
 
         public Individual(int[] genes)
         {
-            fitness = 0;
-            this.genes = genes;
+          fitness = 0;
+          this.genes = genes;
         }
 
         public Individual()
@@ -49,6 +50,11 @@ namespace WindowsFormsApplication1
         public int getLength()
         {
             return genelength;
+        }
+
+        public void setLength(int setLength)
+        {
+            genelength = setLength;
         }
 
         public void setFitness(float setFit)
