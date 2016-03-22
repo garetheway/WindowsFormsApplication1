@@ -67,8 +67,6 @@ namespace WindowsFormsApplication1
             individuals.Sort();
             Individual fittestIndividual = individuals.ElementAt(0);
 
-            // Set up two new lists to serve as the production lines to allocate to. For each new production line, declare it here.
-
             // Allocate to the production lines on a greedy basis of odd numbers to the first line, even numbers to the second.
             for (int i = 0; i < fittestIndividual.getLength(); i++)
             {

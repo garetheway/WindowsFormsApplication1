@@ -12,17 +12,40 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.workOrdersTableAdapter.Fill(this.scheduleDatabaseDataSet.WorkOrders);
+            panelTop.BackColor = Color.FromArgb(73, 129, 161);      
+            lblSwinprod.BackColor = Color.FromArgb(73, 129, 161);      
+        }
+       
         public Form1(Population pop, WorkOrderCollection workOrders)
         {
             InitializeComponent();
+            List<TextBox> unallocatedOrders = new List<TextBox>();
             List<TextBox> prodLine1 = new List<TextBox>();
             List<TextBox> prodLine2 = new List<TextBox>();
+            DataTable dt = workOrdersTableAdapter.GetUnallocatedOrders();
+
+
+            // SET UP UNALLOCATED ORDERS
+            for (int i = 0; i < workOrders.unallocated.Count; i++)
+            {
+                unallocatedOrders.Add(new TextBox());
+                unallocatedOrders[i].Location = new System.Drawing.Point(i * 125, 40);
+                unallocatedOrders[i].Size = new System.Drawing.Size(120, 80);
+                unallocatedOrders[i].Multiline = true;
+                unallocatedOrders[i].Enabled = false;
+                unallocatedOrders[i].Name = "txtprodUA" + i.ToString();
+                this.Controls.Add(unallocatedOrders[i]);
+            }   
 
             // SET UP PRODUCTION LINE 1
             for (int i = 0; i < pop.ProdLine1.Count; i++)
             {
                 prodLine1.Add(new TextBox());
-                prodLine1[i].Location = new System.Drawing.Point(i*155, 25);
+                prodLine1[i].Location = new System.Drawing.Point(i * 155, 200);
                 prodLine1[i].Size = new System.Drawing.Size(150, 90);
                 prodLine1[i].Multiline = true;
                 prodLine1[i].Enabled = false;
@@ -34,12 +57,32 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < pop.ProdLine2.Count; i++)
             {
                 prodLine2.Add(new TextBox());
-                prodLine2[i].Location = new System.Drawing.Point(i*155, 150);
+                prodLine2[i].Location = new System.Drawing.Point(i*155, 325);
                 prodLine2[i].Size = new System.Drawing.Size(150, 90);
                 prodLine2[i].Multiline = true;
                 prodLine2[i].Enabled = false;
                 this.Controls.Add(prodLine2[i]);
             }
+
+            // ALLOCATION OF UNALLOCATED ORDERS
+            for (int index = 0; index < unallocatedOrders.Count; index++)
+            {
+                TextBox wo = unallocatedOrders[index];
+                if (wo.Text == String.Empty)
+                {
+                    wo.AppendText("ID: " + workOrders.unallocated[index].WorkOrderID.ToString() + Environment.NewLine +
+                                  "Customer: " + workOrders.unallocated[index].Customer + Environment.NewLine +
+                                  "Product: " + workOrders.unallocated[index].Product + Environment.NewLine + "Qty: " +
+                                  workOrders.unallocated[index].Quantity + Environment.NewLine + "Due: " +
+                                  workOrders.unallocated[index].DueDate.Date.ToString("dd/MM/yyyy") +
+                                  Environment.NewLine + "CD: " +
+                                  workOrders.unallocated[index].CompletionDate.Date.ToString("dd/MM/yyyy"));
+                    wo.BackColor = Color.FromArgb(165, 192, 208);
+                }
+                wo.BringToFront();
+                wo = null;
+            }
+
 
             // ALLOCATION OF LINE 1
             foreach (int myInt in pop.ProdLine1)
@@ -111,14 +154,16 @@ namespace WindowsFormsApplication1
                     wo = null;
                 }
             }
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
 
-            //prodLine1txt.Enabled = false;
-            foreach (int myInt in pop.ProdLine2)
-            {
-                //   prodLine2txt.AppendText(workOrders.orders[myInt].WorkOrderID.ToString() + "\t");
-            }
-            //prodLine2txt.Enabled = false;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
