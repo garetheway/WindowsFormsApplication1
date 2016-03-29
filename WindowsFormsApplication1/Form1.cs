@@ -12,17 +12,18 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        frmAddWorkOrder newwrkorderFrm = new frmAddWorkOrder();
 
         private void Form1_Load(object sender, EventArgs e)
         {
             this.workOrdersTableAdapter.Fill(this.scheduleDatabaseDataSet.WorkOrders);
-            panelTop.BackColor = Color.FromArgb(73, 129, 161);      
-            pnlBottom.BackColor = Color.FromArgb(0, 14, 60);      
+            panelTop.BackColor = Color.FromArgb(73, 129, 161);
+            pnlBottom.BackColor = Color.FromArgb(0, 14, 60);
             lblSwinprod.BackColor = Color.FromArgb(73, 129, 161);
-            lblProdLine1.BackColor = Color.FromArgb(0, 14, 60);     
-            lblProdLine2.BackColor = Color.FromArgb(0, 14, 60);     
+            lblProdLine1.BackColor = Color.FromArgb(0, 14, 60);
+            lblProdLine2.BackColor = Color.FromArgb(0, 14, 60);
         }
-       
+
         public Form1(Population pop, WorkOrderCollection workOrders)
         {
             InitializeComponent();
@@ -36,19 +37,19 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < workOrders.unallocated.Count; i++)
             {
                 unallocatedOrders.Add(new TextBox());
-                unallocatedOrders[i].Location = new System.Drawing.Point(i * 125, 40);
+                unallocatedOrders[i].Location = new System.Drawing.Point(i*125, 40);
                 unallocatedOrders[i].Size = new System.Drawing.Size(120, 80);
                 unallocatedOrders[i].Multiline = true;
                 unallocatedOrders[i].Enabled = false;
                 unallocatedOrders[i].Name = "txtprodUA" + i.ToString();
                 this.Controls.Add(unallocatedOrders[i]);
-            }   
+            }
 
             // SET UP PRODUCTION LINE 1
             for (int i = 0; i < pop.ProdLine1.Count; i++)
             {
                 prodLine1.Add(new TextBox());
-                prodLine1[i].Location = new System.Drawing.Point(i * 155, 200);
+                prodLine1[i].Location = new System.Drawing.Point(i*155, 200);
                 prodLine1[i].Size = new System.Drawing.Size(150, 90);
                 prodLine1[i].Multiline = true;
                 prodLine1[i].Enabled = false;
@@ -117,7 +118,6 @@ namespace WindowsFormsApplication1
                         }
                         break;
                     }
-                    wo.BringToFront();
                     wo = null;
                 }
             }
@@ -125,19 +125,18 @@ namespace WindowsFormsApplication1
             // ALLOCATION OF LINE 2
             foreach (int myInt in pop.ProdLine2)
             {
-                //prodLine1txt.AppendText(workOrders.orders[myInt].WorkOrderID.ToString() + "\t");
                 for (int index = 0; index < prodLine2.Count; index++)
                 {
                     TextBox wo = prodLine2[index];
-
                     if (wo.Text == String.Empty)
                     {
                         wo.AppendText("ID: " + workOrders.orders[myInt].WorkOrderID.ToString() + Environment.NewLine +
                                       "Customer: " + workOrders.orders[myInt].Customer + Environment.NewLine +
                                       "Product: " + workOrders.orders[myInt].Product + Environment.NewLine + "Qty: " +
                                       workOrders.orders[myInt].Quantity + Environment.NewLine + "Due: " +
-                                      workOrders.orders[myInt].DueDate.Date.ToString("dd/MM/yyyy") + Environment.NewLine +
-                                      "CD: " + workOrders.orders[myInt].CompletionDate.Date.ToString("dd/MM/yyyy"));
+                                      workOrders.orders[myInt].DueDate.Date.ToString("dd/MM/yyyy") +
+                                      Environment.NewLine + "CD: " +
+                                      workOrders.orders[myInt].CompletionDate.Date.ToString("dd/MM/yyyy"));
 
                         if (workOrders.orders[myInt].Status == "HOLD")
                         {
@@ -153,31 +152,26 @@ namespace WindowsFormsApplication1
                         }
                         break;
                     }
-                    wo.BringToFront();
                     wo = null;
                 }
-
-                btnAddNew.MouseHover += new EventHandler(btnAddNew_Hover);
-                btnAddNew.MouseLeave += new EventHandler(btnAddNew_Leave);
-
-                
-
             }
+
+            pnlBottom.SendToBack();
+            btnAddNew.MouseHover += new EventHandler(btnAddNew_Hover);
+            btnAddNew.MouseLeave += new EventHandler(btnAddNew_Leave);
+            newwrkorderFrm.FormClosed += new FormClosedEventHandler(frmAddWorkOrder_FormClosed);
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            frmAddWorkOrder newwrkorderFrm = new frmAddWorkOrder();
             newwrkorderFrm.Show();
         }
 
@@ -192,5 +186,9 @@ namespace WindowsFormsApplication1
         }
 
 
+        private void frmAddWorkOrder_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("Please restart the application to view the new work order created.");
+        }
     }
 }

@@ -131,9 +131,9 @@
             // 
             // pnlBottom
             // 
-            this.pnlBottom.Location = new System.Drawing.Point(0, 166);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 167);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(1928, 889);
+            this.pnlBottom.Size = new System.Drawing.Size(1935, 900);
             this.pnlBottom.TabIndex = 7;
             // 
             // Form1
@@ -141,11 +141,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1904, 1042);
+            this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.lblSwinprod);
             this.Controls.Add(this.lblProdLine2);
             this.Controls.Add(this.lblProdLine1);
             this.Controls.Add(this.panelTop);
-            this.Controls.Add(this.pnlBottom);
             this.Name = "Form1";
             this.Text = "SWINDON PRODUCTION SCHEDULE";
             this.Load += new System.EventHandler(this.Form1_Load);

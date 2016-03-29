@@ -5,7 +5,7 @@ namespace WindowsFormsApplication1
 {
     public class Individual : IComparable
     {
-        private static int genelength = 11;
+        private static int genelength = 10;
         private float fitness;
         private  int[] genes = new int[genelength];
         

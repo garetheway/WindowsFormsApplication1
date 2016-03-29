@@ -46,19 +46,6 @@ namespace WindowsFormsApplication1
 
             // Save the new row to the database 
             this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
-
-/*            System.Data.SqlClient.SqlConnection sqlConnection1 =
-            new System.Data.SqlClient.SqlConnection("Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ScheduleDatabase.mdf;Integrated Security=True");
-
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "INSERT Region (RegionID, RegionDescription) VALUES (5, 'NorthWestern')";
-            cmd.Connection = sqlConnection1;
-
-            sqlConnection1.Open();
-            cmd.ExecuteNonQuery();
-            sqlConnection1.Close();*/
-
         }
 
         private void customerTextBox_mouseclick(object sender, EventArgs e)
