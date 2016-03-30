@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
         public List<WorkOrder> orders = new List<WorkOrder>();
         public List<WorkOrder> unallocated = new List<WorkOrder>();
 
-
+        // Function to populate the 'orders' list.
         public void AssociateWorkOrders()
         {
             // Set up the connection to the database.
@@ -20,28 +20,43 @@ namespace WindowsFormsApplication1
             ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter WorkOrdersTableAdapter =
                 new ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter();
             WorkOrdersTableAdapter.Fill(ScheduleDatabaseDataSet.WorkOrders);
-            DataTable dt = WorkOrdersTableAdapter.GetData();
+            DataTable onu = WorkOrdersTableAdapter.GetOrdersNotUnallocated();
 
             // Create objects of work orders from the database.
-                for (int index = 0; index < dt.Rows.Count; index++)
-                {
-                    string workorderid = dt.Rows[index]["WorkOrderID"].ToString();
-                    string product = dt.Rows[index]["Product"].ToString();
-                    string customer = dt.Rows[index]["Customer"].ToString();
-                    int quantity = int.Parse(dt.Rows[index]["Quantity"].ToString());
-                    string duedate = dt.Rows[index]["DueDate"].ToString();
-                    string status = dt.Rows[index]["Status"].ToString();
-                    DateTime duedatetime = Convert.ToDateTime(duedate);
+            for (int index = 0; index < onu.Rows.Count; index++)
+            {
+                string workorderid = onu.Rows[index]["WorkOrderID"].ToString();
+                string product = onu.Rows[index]["Product"].ToString();
+                string customer = onu.Rows[index]["Customer"].ToString();
+                int quantity = int.Parse(onu.Rows[index]["Quantity"].ToString());
+                string duedate = onu.Rows[index]["DueDate"].ToString();
+                string status = onu.Rows[index]["Status"].ToString();
+                DateTime duedatetime = Convert.ToDateTime(duedate);
+                orders.Add(new WorkOrder(workorderid, product, customer, duedatetime, quantity, status));
+            }
+        }
 
-                    if (status == "Unallocated")
-                    {
-                        unallocated.Add(new WorkOrder(workorderid, product, customer, duedatetime, quantity, status));
-                    }
-                    else
-                    {
-                        orders.Add(new WorkOrder(workorderid, product, customer, duedatetime, quantity, status));
-                    }
-                }
+        // Function to populate the 'unallocated orders' list.
+        public void AssociateUnallocatedOrders()
+        {
+            ScheduleDatabaseDataSet ScheduleDatabaseDataSet = new ScheduleDatabaseDataSet();
+            ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter WorkOrdersTableAdapter =
+                new ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter();
+            WorkOrdersTableAdapter.Fill(ScheduleDatabaseDataSet.WorkOrders);
+            DataTable ouo = WorkOrdersTableAdapter.GetUnallocatedOrders();
+
+            // Create objects of work orders from the database.
+            for (int index = 0; index < ouo.Rows.Count; index++)
+            {
+                string workorderid = ouo.Rows[index]["WorkOrderID"].ToString();
+                string product = ouo.Rows[index]["Product"].ToString();
+                string customer = ouo.Rows[index]["Customer"].ToString();
+                int quantity = int.Parse(ouo.Rows[index]["Quantity"].ToString());
+                string duedate = ouo.Rows[index]["DueDate"].ToString();
+                string status = ouo.Rows[index]["Status"].ToString();
+                DateTime duedatetime = Convert.ToDateTime(duedate);
+                unallocated.Add(new WorkOrder(workorderid, product, customer, duedatetime, quantity, status));
+            }  
         }
 
         public int WorkOrderCount()

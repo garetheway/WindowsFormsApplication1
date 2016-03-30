@@ -30,7 +30,6 @@ namespace WindowsFormsApplication1
             int wid = int.Parse(workOrderIDTextBox.Text);
             int quantity = int.Parse(quantityTextBox.Text);
 
-
             // Create a new row.
             ScheduleDatabaseDataSet.WorkOrdersRow newRegionRow;
             newRegionRow = scheduleDatabaseDataSet.WorkOrders.NewWorkOrdersRow();
@@ -39,18 +38,14 @@ namespace WindowsFormsApplication1
             newRegionRow.Customer = customerTextBox.Text;
             newRegionRow.DueDate = dueDateDateTimePicker.Value.Date;
             newRegionRow.Quantity = quantity;
-            newRegionRow.Status = statusComboBox.Text;
+            newRegionRow.Status = txtStatus.Text;
 
             // Add the row to the Region table 
             this.scheduleDatabaseDataSet.WorkOrders.Rows.Add(newRegionRow);
 
             // Save the new row to the database 
             this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
-        }
-
-        private void customerTextBox_mouseclick(object sender, EventArgs e)
-        {
-            MessageBox.Show("CLICKED");
+            MessageBox.Show("Work Order submitted! Close the form to see new orders.");
         }
     }
 }

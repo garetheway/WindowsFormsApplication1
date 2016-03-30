@@ -38,12 +38,17 @@
             this.tableAdapterManager = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager();
             this.lblSwinprod = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.pnlUnallocated = new System.Windows.Forms.Panel();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.pnlLine2 = new System.Windows.Forms.Panel();
+            this.pnlLine1 = new System.Windows.Forms.Panel();
+            this.btnRunSchedule = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).BeginInit();
             this.panelTop.SuspendLayout();
+            this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblProdLine1
@@ -52,7 +57,7 @@
             this.lblProdLine1.BackColor = System.Drawing.Color.Transparent;
             this.lblProdLine1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProdLine1.ForeColor = System.Drawing.Color.White;
-            this.lblProdLine1.Location = new System.Drawing.Point(2, 178);
+            this.lblProdLine1.Location = new System.Drawing.Point(9, 12);
             this.lblProdLine1.Name = "lblProdLine1";
             this.lblProdLine1.Size = new System.Drawing.Size(117, 15);
             this.lblProdLine1.TabIndex = 3;
@@ -64,7 +69,7 @@
             this.lblProdLine2.BackColor = System.Drawing.Color.Transparent;
             this.lblProdLine2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProdLine2.ForeColor = System.Drawing.Color.White;
-            this.lblProdLine2.Location = new System.Drawing.Point(2, 298);
+            this.lblProdLine2.Location = new System.Drawing.Point(9, 142);
             this.lblProdLine2.Name = "lblProdLine2";
             this.lblProdLine2.Size = new System.Drawing.Size(117, 15);
             this.lblProdLine2.TabIndex = 4;
@@ -111,11 +116,20 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.btnRunSchedule);
+            this.panelTop.Controls.Add(this.pnlUnallocated);
             this.panelTop.Controls.Add(this.btnAddNew);
             this.panelTop.Location = new System.Drawing.Point(-7, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1935, 166);
+            this.panelTop.Size = new System.Drawing.Size(1935, 164);
             this.panelTop.TabIndex = 6;
+            // 
+            // pnlUnallocated
+            // 
+            this.pnlUnallocated.Location = new System.Drawing.Point(14, 41);
+            this.pnlUnallocated.Name = "pnlUnallocated";
+            this.pnlUnallocated.Size = new System.Drawing.Size(1885, 81);
+            this.pnlUnallocated.TabIndex = 1;
             // 
             // btnAddNew
             // 
@@ -131,20 +145,48 @@
             // 
             // pnlBottom
             // 
-            this.pnlBottom.Location = new System.Drawing.Point(0, 167);
+            this.pnlBottom.Controls.Add(this.pnlLine2);
+            this.pnlBottom.Controls.Add(this.lblProdLine2);
+            this.pnlBottom.Controls.Add(this.pnlLine1);
+            this.pnlBottom.Controls.Add(this.lblProdLine1);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 164);
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(1935, 900);
             this.pnlBottom.TabIndex = 7;
+            // 
+            // pnlLine2
+            // 
+            this.pnlLine2.Location = new System.Drawing.Point(12, 160);
+            this.pnlLine2.Name = "pnlLine2";
+            this.pnlLine2.Size = new System.Drawing.Size(1245, 100);
+            this.pnlLine2.TabIndex = 1;
+            // 
+            // pnlLine1
+            // 
+            this.pnlLine1.Location = new System.Drawing.Point(12, 30);
+            this.pnlLine1.Name = "pnlLine1";
+            this.pnlLine1.Size = new System.Drawing.Size(1245, 100);
+            this.pnlLine1.TabIndex = 0;
+            // 
+            // btnRunSchedule
+            // 
+            this.btnRunSchedule.BackColor = System.Drawing.Color.White;
+            this.btnRunSchedule.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
+            this.btnRunSchedule.Location = new System.Drawing.Point(14, 128);
+            this.btnRunSchedule.Name = "btnRunSchedule";
+            this.btnRunSchedule.Size = new System.Drawing.Size(120, 27);
+            this.btnRunSchedule.TabIndex = 2;
+            this.btnRunSchedule.Text = "Schedule";
+            this.btnRunSchedule.UseVisualStyleBackColor = false;
+            this.btnRunSchedule.Click += new System.EventHandler(this.btnRunSchedule_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1904, 1042);
-            this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.lblSwinprod);
-            this.Controls.Add(this.lblProdLine2);
-            this.Controls.Add(this.lblProdLine1);
+            this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.panelTop);
             this.Name = "Form1";
             this.Text = "SWINDON PRODUCTION SCHEDULE";
@@ -153,6 +195,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).EndInit();
             this.panelTop.ResumeLayout(false);
+            this.pnlBottom.ResumeLayout(false);
+            this.pnlBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,6 +215,10 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.Panel pnlBottom;
+        private System.Windows.Forms.Panel pnlLine1;
+        private System.Windows.Forms.Panel pnlLine2;
+        private System.Windows.Forms.Panel pnlUnallocated;
+        private System.Windows.Forms.Button btnRunSchedule;
 
 
 

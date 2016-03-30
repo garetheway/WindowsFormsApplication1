@@ -39,13 +39,13 @@
             this.workOrdersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.workOrdersTableAdapter = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter();
             this.tableAdapterManager = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager();
-            this.statusComboBox = new System.Windows.Forms.ComboBox();
             this.workOrderIDTextBox = new System.Windows.Forms.TextBox();
             this.productTextBox = new System.Windows.Forms.TextBox();
             this.customerTextBox = new System.Windows.Forms.TextBox();
             this.dueDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.txtStatus = new System.Windows.Forms.TextBox();
             statusLabel = new System.Windows.Forms.Label();
             workOrderIDLabel = new System.Windows.Forms.Label();
             productLabel = new System.Windows.Forms.Label();
@@ -131,14 +131,6 @@
             this.tableAdapterManager.UpdateOrder = WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager.WorkOrdersTableAdapter = this.workOrdersTableAdapter;
             // 
-            // statusComboBox
-            // 
-            this.statusComboBox.FormattingEnabled = true;
-            this.statusComboBox.Location = new System.Drawing.Point(97, 167);
-            this.statusComboBox.Name = "statusComboBox";
-            this.statusComboBox.Size = new System.Drawing.Size(121, 21);
-            this.statusComboBox.TabIndex = 1;
-            // 
             // workOrderIDTextBox
             // 
             this.workOrderIDTextBox.Location = new System.Drawing.Point(97, 15);
@@ -184,11 +176,19 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(97, 167);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(100, 20);
+            this.txtStatus.TabIndex = 13;
+            // 
             // frmAddWorkOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 262);
+            this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(quantityLabel);
             this.Controls.Add(this.quantityTextBox);
@@ -201,7 +201,6 @@
             this.Controls.Add(workOrderIDLabel);
             this.Controls.Add(this.workOrderIDTextBox);
             this.Controls.Add(statusLabel);
-            this.Controls.Add(this.statusComboBox);
             this.Name = "frmAddWorkOrder";
             this.Text = "Add New Work Order";
             this.Load += new System.EventHandler(this.frmAddWorkOrder_Load);
@@ -218,12 +217,12 @@
         private System.Windows.Forms.BindingSource workOrdersBindingSource;
         private ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter workOrdersTableAdapter;
         private ScheduleDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.ComboBox statusComboBox;
         private System.Windows.Forms.TextBox workOrderIDTextBox;
         private System.Windows.Forms.TextBox productTextBox;
         private System.Windows.Forms.TextBox customerTextBox;
         private System.Windows.Forms.DateTimePicker dueDateDateTimePicker;
         private System.Windows.Forms.TextBox quantityTextBox;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.TextBox txtStatus;
     }
 }
