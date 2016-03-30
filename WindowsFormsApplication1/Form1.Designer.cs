@@ -38,12 +38,12 @@
             this.tableAdapterManager = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager();
             this.lblSwinprod = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnRunSchedule = new System.Windows.Forms.Button();
             this.pnlUnallocated = new System.Windows.Forms.Panel();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.pnlLine2 = new System.Windows.Forms.Panel();
             this.pnlLine1 = new System.Windows.Forms.Panel();
-            this.btnRunSchedule = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).BeginInit();
@@ -124,6 +124,18 @@
             this.panelTop.Size = new System.Drawing.Size(1935, 164);
             this.panelTop.TabIndex = 6;
             // 
+            // btnRunSchedule
+            // 
+            this.btnRunSchedule.BackColor = System.Drawing.Color.White;
+            this.btnRunSchedule.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
+            this.btnRunSchedule.Location = new System.Drawing.Point(14, 128);
+            this.btnRunSchedule.Name = "btnRunSchedule";
+            this.btnRunSchedule.Size = new System.Drawing.Size(120, 27);
+            this.btnRunSchedule.TabIndex = 2;
+            this.btnRunSchedule.Text = "Schedule";
+            this.btnRunSchedule.UseVisualStyleBackColor = false;
+            this.btnRunSchedule.Click += new System.EventHandler(this.btnRunSchedule_Click);
+            // 
             // pnlUnallocated
             // 
             this.pnlUnallocated.Location = new System.Drawing.Point(14, 41);
@@ -158,27 +170,15 @@
             // 
             this.pnlLine2.Location = new System.Drawing.Point(12, 160);
             this.pnlLine2.Name = "pnlLine2";
-            this.pnlLine2.Size = new System.Drawing.Size(1245, 100);
+            this.pnlLine2.Size = new System.Drawing.Size(1880, 100);
             this.pnlLine2.TabIndex = 1;
             // 
             // pnlLine1
             // 
             this.pnlLine1.Location = new System.Drawing.Point(12, 30);
             this.pnlLine1.Name = "pnlLine1";
-            this.pnlLine1.Size = new System.Drawing.Size(1245, 100);
+            this.pnlLine1.Size = new System.Drawing.Size(1880, 100);
             this.pnlLine1.TabIndex = 0;
-            // 
-            // btnRunSchedule
-            // 
-            this.btnRunSchedule.BackColor = System.Drawing.Color.White;
-            this.btnRunSchedule.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold);
-            this.btnRunSchedule.Location = new System.Drawing.Point(14, 128);
-            this.btnRunSchedule.Name = "btnRunSchedule";
-            this.btnRunSchedule.Size = new System.Drawing.Size(120, 27);
-            this.btnRunSchedule.TabIndex = 2;
-            this.btnRunSchedule.Text = "Schedule";
-            this.btnRunSchedule.UseVisualStyleBackColor = false;
-            this.btnRunSchedule.Click += new System.EventHandler(this.btnRunSchedule_Click);
             // 
             // Form1
             // 

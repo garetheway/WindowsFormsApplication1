@@ -153,7 +153,20 @@ WHERE        (Status = 'Unallocated') OR (Status = 'READY')</CommandText>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status
 FROM            WorkOrders
-WHERE        (Status &lt;&gt; 'Unallocated')</CommandText>
+WHERE        (Status = 'HOLD') OR
+                         (Status = 'SCHED') OR
+                         (Status = 'WIP') OR
+                         (Status = 'KITTING')</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ScheduleDatabaseConnectionString (Settings)" DbObjectName="dbo.WorkOrders" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillReadyOrder" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetReadyOrders" GeneratorSourceName="FillReadyOrder" GetMethodModifier="Public" GetMethodName="GetReadyOrders" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetReadyOrders" UserSourceName="FillReadyOrder">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status
+FROM            WorkOrders
+WHERE        (Status = 'READY')</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>

@@ -16,12 +16,13 @@ namespace WindowsFormsApplication1
         public int Quantity;
         public string Status;
 
-        public WorkOrder(string WorkOrderID, string Product, string Customer, DateTime DueDate, int Quantity, string Status)
+        public WorkOrder(string WorkOrderID, string Product, string Customer, DateTime DueDate, DateTime CompletionDate, int Quantity, string Status)
         {
             this.WorkOrderID = WorkOrderID;
             this.Product = Product;
             this.Customer = Customer;
             this.DueDate = DueDate;
+            this.CompletionDate = CompletionDate;
             this.Quantity = Quantity;
             this.Status = Status;
         }

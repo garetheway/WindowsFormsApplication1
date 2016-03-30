@@ -1746,7 +1746,7 @@ SELECT WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[6];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, " +
@@ -1760,27 +1760,22 @@ SELECT WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, " +
-                "Status\r\nFROM            WorkOrders\r\nWHERE        (Status <> \'Unallocated\')";
+            this._commandCollection[2].CommandText = @"SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status
+FROM            WorkOrders
+WHERE        (Status = 'HOLD') OR
+                         (Status = 'SCHED') OR
+                         (Status = 'WIP') OR
+                         (Status = 'KITTING')";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = @"INSERT INTO [WorkOrders] ([WorkOrderID], [Product], [Customer], [DueDate], [CompletionDate], [Quantity], [Status]) VALUES (@WorkOrderID, @Product, @Customer, @DueDate, @CompletionDate, @Quantity, @Status);
-SELECT WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status FROM WorkOrders WHERE (WorkOrderID = @WorkOrderID)";
+            this._commandCollection[3].CommandText = "SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, " +
+                "Status\r\nFROM            WorkOrders\r\nWHERE        (Status = \'READY\')";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkOrderID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "WorkOrderID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Product", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Customer", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Customer", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DueDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "DueDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CompletionDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "CompletionDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Status", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = @"UPDATE       WorkOrders
-SET                WorkOrderID = @WorkOrderID, Product = @Product, Customer = @Customer, DueDate = @DueDate, CompletionDate = @CompletionDate, Quantity = @Quantity, 
-                         Status = @Status
-WHERE        (WorkOrderID = @Original_WorkOrderID)";
+            this._commandCollection[4].CommandText = @"INSERT INTO [WorkOrders] ([WorkOrderID], [Product], [Customer], [DueDate], [CompletionDate], [Quantity], [Status]) VALUES (@WorkOrderID, @Product, @Customer, @DueDate, @CompletionDate, @Quantity, @Status);
+SELECT WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status FROM WorkOrders WHERE (WorkOrderID = @WorkOrderID)";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkOrderID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "WorkOrderID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Product", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -1789,7 +1784,21 @@ WHERE        (WorkOrderID = @Original_WorkOrderID)";
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CompletionDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "CompletionDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Status", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkOrderID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "WorkOrderID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[5] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[5].Connection = this.Connection;
+            this._commandCollection[5].CommandText = @"UPDATE       WorkOrders
+SET                WorkOrderID = @WorkOrderID, Product = @Product, Customer = @Customer, DueDate = @DueDate, CompletionDate = @CompletionDate, Quantity = @Quantity, 
+                         Status = @Status
+WHERE        (WorkOrderID = @Original_WorkOrderID)";
+            this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WorkOrderID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "WorkOrderID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Product", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Product", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Customer", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Customer", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DueDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "DueDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CompletionDate", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "CompletionDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Quantity", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Quantity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Status", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_WorkOrderID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "WorkOrderID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1859,6 +1868,30 @@ WHERE        (WorkOrderID = @Original_WorkOrderID)";
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual ScheduleDatabaseDataSet.WorkOrdersDataTable GetOrdersNotUnallocated() {
             this.Adapter.SelectCommand = this.CommandCollection[2];
+            ScheduleDatabaseDataSet.WorkOrdersDataTable dataTable = new ScheduleDatabaseDataSet.WorkOrdersDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillReadyOrder(ScheduleDatabaseDataSet.WorkOrdersDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual ScheduleDatabaseDataSet.WorkOrdersDataTable GetReadyOrders() {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             ScheduleDatabaseDataSet.WorkOrdersDataTable dataTable = new ScheduleDatabaseDataSet.WorkOrdersDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -2141,7 +2174,7 @@ WHERE        (WorkOrderID = @Original_WorkOrderID)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
         public virtual int InsertQuery(int WorkOrderID, string Product, string Customer, global::System.Nullable<global::System.DateTime> DueDate, global::System.Nullable<global::System.DateTime> CompletionDate, global::System.Nullable<int> Quantity, string Status) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
             command.Parameters[0].Value = ((int)(WorkOrderID));
             if ((Product == null)) {
                 command.Parameters[1].Value = global::System.DBNull.Value;
@@ -2201,7 +2234,7 @@ WHERE        (WorkOrderID = @Original_WorkOrderID)";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery(int WorkOrderID, string Product, string Customer, global::System.Nullable<global::System.DateTime> DueDate, global::System.Nullable<global::System.DateTime> CompletionDate, global::System.Nullable<int> Quantity, string Status, int Original_WorkOrderID) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[5];
             command.Parameters[0].Value = ((int)(WorkOrderID));
             if ((Product == null)) {
                 command.Parameters[1].Value = global::System.DBNull.Value;

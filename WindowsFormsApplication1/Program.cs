@@ -14,38 +14,13 @@ namespace WindowsFormsApplication1
         [STAThread]
         static void Main()
         {
-            //Parameters
-            int numberOfGens= 250;
-
-
-            //Initial Pop setup
+            //Initial class setup
             var workOrders = new WorkOrderCollection();
-            workOrders.AssociateWorkOrders();
             var pop = new Population();
-            
-
-            pop.GenerateRandomPopulation(workOrders.orders);
-            
-            pop.EvaluateFitness(workOrders.orders);
-            //pop.PrintPopulation();
-
-
-            //Evolution
-            for (int i = 0; i < numberOfGens; i++)
-			{
-                pop = Algorithm.EvolvePopulation(pop);
-                pop.EvaluateFitness(workOrders.orders);
-                //pop.PrintPopulation();
-            }
-            
-
-            pop.AllocateLines(workOrders.orders);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1(pop, workOrders));
-
-    
         }
     }
 }

@@ -30,9 +30,11 @@ namespace WindowsFormsApplication1
                 string customer = onu.Rows[index]["Customer"].ToString();
                 int quantity = int.Parse(onu.Rows[index]["Quantity"].ToString());
                 string duedate = onu.Rows[index]["DueDate"].ToString();
+                string completiondate = onu.Rows[index]["CompletionDate"].ToString();
                 string status = onu.Rows[index]["Status"].ToString();
                 DateTime duedatetime = Convert.ToDateTime(duedate);
-                orders.Add(new WorkOrder(workorderid, product, customer, duedatetime, quantity, status));
+                DateTime completiondatetime = Convert.ToDateTime(completiondate);
+                orders.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status));
             }
         }
 
@@ -55,7 +57,8 @@ namespace WindowsFormsApplication1
                 string duedate = ouo.Rows[index]["DueDate"].ToString();
                 string status = ouo.Rows[index]["Status"].ToString();
                 DateTime duedatetime = Convert.ToDateTime(duedate);
-                unallocated.Add(new WorkOrder(workorderid, product, customer, duedatetime, quantity, status));
+                DateTime completiondatetime = DateTime.Now;
+                unallocated.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status));
             }  
         }
 

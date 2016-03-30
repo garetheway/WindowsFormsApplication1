@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label statusLabel;
             System.Windows.Forms.Label workOrderIDLabel;
             System.Windows.Forms.Label productLabel;
             System.Windows.Forms.Label customerLabel;
@@ -45,8 +44,6 @@
             this.dueDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.quantityTextBox = new System.Windows.Forms.TextBox();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            statusLabel = new System.Windows.Forms.Label();
             workOrderIDLabel = new System.Windows.Forms.Label();
             productLabel = new System.Windows.Forms.Label();
             customerLabel = new System.Windows.Forms.Label();
@@ -55,15 +52,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // statusLabel
-            // 
-            statusLabel.AutoSize = true;
-            statusLabel.Location = new System.Drawing.Point(12, 170);
-            statusLabel.Name = "statusLabel";
-            statusLabel.Size = new System.Drawing.Size(40, 13);
-            statusLabel.TabIndex = 0;
-            statusLabel.Text = "Status:";
             // 
             // workOrderIDLabel
             // 
@@ -176,19 +164,11 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(97, 167);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(100, 20);
-            this.txtStatus.TabIndex = 13;
-            // 
             // frmAddWorkOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 262);
-            this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(quantityLabel);
             this.Controls.Add(this.quantityTextBox);
@@ -200,9 +180,8 @@
             this.Controls.Add(this.productTextBox);
             this.Controls.Add(workOrderIDLabel);
             this.Controls.Add(this.workOrderIDTextBox);
-            this.Controls.Add(statusLabel);
             this.Name = "frmAddWorkOrder";
-            this.Text = "Add New Work Order";
+            this.Text = "Work Order - Add New";
             this.Load += new System.EventHandler(this.frmAddWorkOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).EndInit();
@@ -223,6 +202,5 @@
         private System.Windows.Forms.DateTimePicker dueDateDateTimePicker;
         private System.Windows.Forms.TextBox quantityTextBox;
         private System.Windows.Forms.Button btnSubmit;
-        private System.Windows.Forms.TextBox txtStatus;
     }
 }

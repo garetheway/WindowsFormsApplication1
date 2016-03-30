@@ -37,8 +37,9 @@ namespace WindowsFormsApplication1
             newRegionRow.Product = productTextBox.Text;
             newRegionRow.Customer = customerTextBox.Text;
             newRegionRow.DueDate = dueDateDateTimePicker.Value.Date;
+            newRegionRow.CompletionDate = DateTime.Now;
             newRegionRow.Quantity = quantity;
-            newRegionRow.Status = txtStatus.Text;
+            newRegionRow.Status = "Unallocated";
 
             // Add the row to the Region table 
             this.scheduleDatabaseDataSet.WorkOrders.Rows.Add(newRegionRow);

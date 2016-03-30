@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
         Fitness fitcalc = new Fitness();
         Individual ind = new Individual();
         private static readonly Random RandomGenerator = new Random();
-        List<Individual> individuals = new List<Individual>(popsize);
+        public List<Individual> individuals = new List<Individual>(popsize);
         static int generation;
         public List<int> ProdLine1 = new List<int>();
         public List<int> ProdLine2 = new List<int>();
@@ -79,7 +79,7 @@ namespace WindowsFormsApplication1
             }
 
             // Print out the information for the first production line. 
-            Console.WriteLine(Environment.NewLine);
+/*            Console.WriteLine(Environment.NewLine);
             Console.Write("LINE 1:" + Environment.NewLine);
             for (int i = 0; i < ProdLine1.Count; i++)
             {
@@ -94,7 +94,7 @@ namespace WindowsFormsApplication1
             {
                 Console.Write("ID: " + workOrders[ProdLine2[i]].WorkOrderID + " - Completion: " +
                               workOrders[ProdLine2[i]].CompletionDate + Environment.NewLine);
-            }
+            }*/
         }
 
         // Function to calculate if a value is odd. We use this for the greedy algorithm.

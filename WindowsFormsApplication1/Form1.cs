@@ -16,6 +16,9 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         frmAddWorkOrder newwrkorderFrm = new frmAddWorkOrder();
+        public int numberOfGens = 250;
+        public Population popp;
+        public WorkOrderCollection worky;
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,11 +29,14 @@ namespace WindowsFormsApplication1
             lblSwinprod.BackColor = Color.FromArgb(73, 129, 161);
             lblProdLine1.BackColor = Color.FromArgb(0, 14, 60);
             lblProdLine2.BackColor = Color.FromArgb(0, 14, 60);
+
         }
 
         public Form1(Population pop, WorkOrderCollection workOrders)
         {
             InitializeComponent();
+            popp = pop;
+            worky = workOrders;
             List<TextBox> prodLine1 = new List<TextBox>();
             List<TextBox> prodLine2 = new List<TextBox>();
 
@@ -40,126 +46,10 @@ namespace WindowsFormsApplication1
             // Set up the production lines!
             LoadSchedule(pop, workOrders);
 
-
-            /*// SET UP PRODUCTION LINE 1
-            for (int i = 0; i < pop.ProdLine1.Count; i++)
-            {
-                prodLine1.Add(new TextBox());
-                prodLine1[i].Name = "P" + i;
-                prodLine1[i].Location = new System.Drawing.Point(i*155);
-                prodLine1[i].Size = new System.Drawing.Size(150, 90);
-                prodLine1[i].Multiline = true;
-                prodLine1[i].ReadOnly = true;
-                pnlLine1.Controls.Add(prodLine1[i]);
-            }
-
-            // SET UP PRODUCTION LINE 2
-            for (int i = 0; i < pop.ProdLine2.Count; i++)
-            {
-                prodLine2.Add(new TextBox());
-                prodLine2[i].Location = new System.Drawing.Point(i*155);
-                prodLine2[i].Size = new System.Drawing.Size(150, 90);
-                prodLine2[i].Multiline = true;
-                prodLine2[i].ReadOnly = true;
-                pnlLine2.Controls.Add(prodLine2[i]);
-            }
-
-
-            // ALLOCATION OF LINE 1
-            foreach (int myInt in pop.ProdLine1)
-            {
-                for (int index = 0; index < prodLine1.Count; index++)
-                {
-                    TextBox wo = prodLine1[index];
-                    if (wo.Text == String.Empty)
-                    {
-                        wo.AppendText("ID: " + workOrders.orders[myInt].WorkOrderID.ToString() + Environment.NewLine +
-                                      "Customer: " + workOrders.orders[myInt].Customer + Environment.NewLine +
-                                      "Product: " + workOrders.orders[myInt].Product + Environment.NewLine + "Qty: " +
-                                      workOrders.orders[myInt].Quantity + Environment.NewLine + "Due: " +
-                                      workOrders.orders[myInt].DueDate.Date.ToString("dd/MM/yyyy") +
-                                      Environment.NewLine + "CD: " +
-                                      workOrders.orders[myInt].CompletionDate.Date.ToString("dd/MM/yyyy"));
-
-                        if (workOrders.orders[myInt].Status == "HOLD")
-                        {
-                            wo.BackColor = Color.FromArgb(255, 76, 76);
-                        }
-                        else if (workOrders.orders[myInt].Status == "KITTING")
-                        {
-                            wo.BackColor = Color.Yellow;
-                        }
-                        else if (workOrders.orders[myInt].Status == "WIP")
-                        {
-                            wo.BackColor = Color.Chartreuse;
-                        }
-                        break;
-                    }
-                }
-            }
-
-            // ALLOCATION OF LINE 2
-            foreach (int myInt in pop.ProdLine2)
-            {
-                for (int index = 0; index < prodLine2.Count; index++)
-                {
-                    TextBox wo = prodLine2[index];
-                    if (wo.Text == String.Empty)
-                    {
-                        wo.AppendText("ID: " + workOrders.orders[myInt].WorkOrderID.ToString() + Environment.NewLine +
-                                      "Customer: " + workOrders.orders[myInt].Customer + Environment.NewLine +
-                                      "Product: " + workOrders.orders[myInt].Product + Environment.NewLine + "Qty: " +
-                                      workOrders.orders[myInt].Quantity + Environment.NewLine + "Due: " +
-                                      workOrders.orders[myInt].DueDate.Date.ToString("dd/MM/yyyy") +
-                                      Environment.NewLine + "CD: " +
-                                      workOrders.orders[myInt].CompletionDate.Date.ToString("dd/MM/yyyy"));
-
-                        if (workOrders.orders[myInt].Status == "HOLD")
-                        {
-                            wo.BackColor = Color.FromArgb(255, 76, 76);
-                        }
-                        else if (workOrders.orders[myInt].Status == "KITTING")
-                        {
-                            wo.BackColor = Color.Yellow;
-                        }
-                        else if (workOrders.orders[myInt].Status == "WIP")
-                        {
-                            wo.BackColor = Color.Chartreuse;
-                        }
-                        break;
-                    }
-                }
-            }
-
-            pnlBottom.SendToBack();*/
             btnAddNew.MouseHover += new EventHandler(btnAddNew_Hover);
             btnAddNew.MouseLeave += new EventHandler(btnAddNew_Leave);
             // This line calls the 'LoadUnallocated' function whenever the new work form is closed.
             newwrkorderFrm.FormClosed += (sender, e) => LoadUnallocated(pop, workOrders);
-        }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void btnAddNew_Click(object sender, EventArgs e)
-        {
-            newwrkorderFrm.Show();
-        }
-
-        private void btnAddNew_Hover(object sender, EventArgs e)
-        {
-            btnAddNew.BackColor = Color.SkyBlue;
-        }
-
-        private void btnAddNew_Leave(object sender, EventArgs e)
-        {
-            btnAddNew.BackColor = Color.White;
         }
 
         // Function to refresh the unallocated orders list.
@@ -180,7 +70,7 @@ namespace WindowsFormsApplication1
                 unallocatedOrders[i].Multiline = true;
                 unallocatedOrders[i].ReadOnly = true;
                 // When an unallocated order is clicked, open the detailed view.
-                unallocatedOrders[i].Click += (sender, e) => WorkOrderClick(sender, e, pop, workOrders);
+                unallocatedOrders[i].Click += (sender, e) => UnallocatedWorkOrderClick(sender, e, pop, workOrders);
                 unallocatedOrders[i].Name = "txtprodUA" + i.ToString();
                 unallocatedOrders[i].BackColor = Color.FromArgb(165, 192, 208);
                 pnlUnallocated.Controls.Add(unallocatedOrders[i]);
@@ -214,8 +104,50 @@ namespace WindowsFormsApplication1
 
         private void LoadSchedule(Population pop, WorkOrderCollection workOrders)
         {
+           // Create our table adapter to interact with the database.
+            this.workOrdersTableAdapter.Fill(this.scheduleDatabaseDataSet.WorkOrders);
+            // Clear any existing data from the orders list.
             workOrders.orders.Clear();
+            pop.individuals.Clear();
+
+            foreach (DataRow row in workOrdersTableAdapter.GetReadyOrders().Rows)
+            {
+                int wid = int.Parse(row["WorkOrderID"].ToString());
+                ScheduleDatabaseDataSet.WorkOrdersRow workorderrow;
+                workorderrow =
+                    scheduleDatabaseDataSet.WorkOrders.FindByWorkOrderID(wid);
+                workorderrow.Status = "SCHED";
+                this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
+            }
+
+            // Reassociate data incase of updates.
             workOrders.AssociateWorkOrders();
+            
+            
+            // Create a population for the algorithm to run.
+            pop.GenerateRandomPopulation(workOrders.orders);
+            // Evaluate initial population fitness.
+            pop.EvaluateFitness(workOrders.orders);
+
+            //Evolution
+            for (int i = 0; i < numberOfGens; i++)
+            {
+                pop = Algorithm.EvolvePopulation(pop);
+                pop.EvaluateFitness(workOrders.orders);
+            }
+            // Allocate fittest individual to lines.
+            pop.AllocateLines(workOrders.orders);
+
+            for (int i = 0; i < workOrders.orders.Count; i++)
+            {
+                DateTime cd = workOrders.orders[i].CompletionDate;
+                ScheduleDatabaseDataSet.WorkOrdersRow workorderrow;
+                workorderrow =
+                    scheduleDatabaseDataSet.WorkOrders.FindByWorkOrderID(int.Parse(workOrders.orders[i].WorkOrderID));
+                workorderrow.CompletionDate = cd;
+                this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
+            }
+
             pnlLine1.Controls.Clear();
             pnlLine2.Controls.Clear();
             List<TextBox> prodLine1 = new List<TextBox>();
@@ -226,7 +158,7 @@ namespace WindowsFormsApplication1
             {
                 prodLine1.Add(new TextBox());
                 prodLine1[i].Name = "P" + i;
-                prodLine1[i].Location = new System.Drawing.Point(i * 155);
+                prodLine1[i].Location = new System.Drawing.Point(i*155);
                 prodLine1[i].Size = new System.Drawing.Size(150, 90);
                 prodLine1[i].Multiline = true;
                 prodLine1[i].ReadOnly = true;
@@ -237,7 +169,7 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < pop.ProdLine2.Count; i++)
             {
                 prodLine2.Add(new TextBox());
-                prodLine2[i].Location = new System.Drawing.Point(i * 155);
+                prodLine2[i].Location = new System.Drawing.Point(i*155);
                 prodLine2[i].Size = new System.Drawing.Size(150, 90);
                 prodLine2[i].Multiline = true;
                 prodLine2[i].ReadOnly = true;
@@ -309,13 +241,11 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-
+            LoadUnallocated(pop, workOrders);
             pnlBottom.SendToBack();
-
         }
 
-
-        private void WorkOrderClick(object sender, EventArgs e, Population pop, WorkOrderCollection workOrders)
+        private void UnallocatedWorkOrderClick(object sender, EventArgs e, Population pop, WorkOrderCollection workOrders)
         {
             TextBox textBox = (TextBox) sender;
 
@@ -331,9 +261,29 @@ namespace WindowsFormsApplication1
             }
         }
 
+
         private void btnRunSchedule_Click(object sender, EventArgs e)
         {
+            LoadSchedule(popp, worky);
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            newwrkorderFrm.Show();
+        }
+
+        private void btnAddNew_Hover(object sender, EventArgs e)
+        {
+            btnAddNew.BackColor = Color.SkyBlue;
+        }
+
+        private void btnAddNew_Leave(object sender, EventArgs e)
+        {
+            btnAddNew.BackColor = Color.White;
         }
     }
 }
