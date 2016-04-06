@@ -15,8 +15,9 @@ namespace WindowsFormsApplication1
         public DateTime CompletionDate;
         public int Quantity;
         public string Status;
+        public string Notes;
 
-        public WorkOrder(string WorkOrderID, string Product, string Customer, DateTime DueDate, DateTime CompletionDate, int Quantity, string Status)
+        public WorkOrder(string WorkOrderID, string Product, string Customer, DateTime DueDate, DateTime CompletionDate, int Quantity, string Status, string Notes)
         {
             this.WorkOrderID = WorkOrderID;
             this.Product = Product;
@@ -25,7 +26,9 @@ namespace WindowsFormsApplication1
             this.CompletionDate = CompletionDate;
             this.Quantity = Quantity;
             this.Status = Status;
+            this.Notes = Notes;
         }
+
 
         public void PrintOrder()
         {
@@ -37,7 +40,4 @@ namespace WindowsFormsApplication1
             Console.Out.WriteLine("\n");
         }
     }
-
-
-
 }

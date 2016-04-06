@@ -2,6 +2,9 @@
     
     
     public partial class ScheduleDatabaseDataSet {
+        partial class WorkOrdersDataTable
+        {
+        }
     }
 }
 

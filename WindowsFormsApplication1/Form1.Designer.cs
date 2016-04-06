@@ -140,7 +140,7 @@
             // 
             this.pnlUnallocated.Location = new System.Drawing.Point(14, 41);
             this.pnlUnallocated.Name = "pnlUnallocated";
-            this.pnlUnallocated.Size = new System.Drawing.Size(1885, 81);
+            this.pnlUnallocated.Size = new System.Drawing.Size(2240, 81);
             this.pnlUnallocated.TabIndex = 1;
             // 
             // btnAddNew

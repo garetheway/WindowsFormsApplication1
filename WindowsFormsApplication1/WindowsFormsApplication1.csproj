@@ -78,6 +78,12 @@
     <Compile Include="frmAddWorkOrder.Designer.cs">
       <DependentUpon>frmAddWorkOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmScheduleOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScheduleOrderDetail.Designer.cs">
+      <DependentUpon>frmScheduleOrderDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUnallocatedOrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddWorkOrder.resx">
       <DependentUpon>frmAddWorkOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScheduleOrderDetail.resx">
+      <DependentUpon>frmScheduleOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUnallocatedOrderDetail.resx">
       <DependentUpon>frmUnallocatedOrderDetail.cs</DependentUpon>

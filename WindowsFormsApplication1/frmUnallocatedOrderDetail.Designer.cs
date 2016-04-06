@@ -101,6 +101,15 @@
             productLabel.TabIndex = 12;
             productLabel.Text = "Product:";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(5, 157);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(101, 13);
+            label1.TabIndex = 21;
+            label1.Text = "Ready to Schedule:";
+            // 
             // scheduleDatabaseDataSet
             // 
             this.scheduleDatabaseDataSet.DataSetName = "ScheduleDatabaseDataSet";
@@ -157,15 +166,6 @@
             this.txtProduct.Size = new System.Drawing.Size(100, 20);
             this.txtProduct.TabIndex = 13;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(5, 157);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(101, 13);
-            label1.TabIndex = 21;
-            label1.Text = "Ready to Schedule:";
-            // 
             // chckReadySchedule
             // 
             this.chckReadySchedule.AutoSize = true;
@@ -177,7 +177,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(214, 167);
+            this.btnUpdate.Location = new System.Drawing.Point(239, 4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(91, 23);
             this.btnUpdate.TabIndex = 23;

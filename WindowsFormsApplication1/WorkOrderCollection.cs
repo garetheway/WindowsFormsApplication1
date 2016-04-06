@@ -11,6 +11,7 @@ namespace WindowsFormsApplication1
     {
         public List<WorkOrder> orders = new List<WorkOrder>();
         public List<WorkOrder> unallocated = new List<WorkOrder>();
+        public List<WorkOrder> archived = new List<WorkOrder>();
 
         // Function to populate the 'orders' list.
         public void AssociateWorkOrders()
@@ -32,9 +33,10 @@ namespace WindowsFormsApplication1
                 string duedate = onu.Rows[index]["DueDate"].ToString();
                 string completiondate = onu.Rows[index]["CompletionDate"].ToString();
                 string status = onu.Rows[index]["Status"].ToString();
+                string notes = onu.Rows[index]["Notes"].ToString();
                 DateTime duedatetime = Convert.ToDateTime(duedate);
                 DateTime completiondatetime = Convert.ToDateTime(completiondate);
-                orders.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status));
+                orders.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status, notes));
             }
         }
 
@@ -56,10 +58,35 @@ namespace WindowsFormsApplication1
                 int quantity = int.Parse(ouo.Rows[index]["Quantity"].ToString());
                 string duedate = ouo.Rows[index]["DueDate"].ToString();
                 string status = ouo.Rows[index]["Status"].ToString();
+                string notes = ouo.Rows[index]["Notes"].ToString();
                 DateTime duedatetime = Convert.ToDateTime(duedate);
                 DateTime completiondatetime = DateTime.Now;
-                unallocated.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status));
+                unallocated.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status, notes));
             }  
+        }
+
+        public void AssociateArchivedOrders()
+        {
+            ScheduleDatabaseDataSet ScheduleDatabaseDataSet = new ScheduleDatabaseDataSet();
+            ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter WorkOrdersTableAdapter =
+                new ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter();
+            WorkOrdersTableAdapter.Fill(ScheduleDatabaseDataSet.WorkOrders);
+            DataTable oa = WorkOrdersTableAdapter.GetArchived();
+
+            // Create objects of work orders from the database.
+            for (int index = 0; index < oa.Rows.Count; index++)
+            {
+                string workorderid = oa.Rows[index]["WorkOrderID"].ToString();
+                string product = oa.Rows[index]["Product"].ToString();
+                string customer = oa.Rows[index]["Customer"].ToString();
+                int quantity = int.Parse(oa.Rows[index]["Quantity"].ToString());
+                string duedate = oa.Rows[index]["DueDate"].ToString();
+                string status = oa.Rows[index]["Status"].ToString();
+                string notes = oa.Rows[index]["Notes"].ToString();
+                DateTime duedatetime = Convert.ToDateTime(duedate);
+                DateTime completiondatetime = DateTime.Now;
+                archived.Add(new WorkOrder(workorderid, product, customer, duedatetime, completiondatetime, quantity, status, notes));
+            }
         }
 
         public int WorkOrderCount()
