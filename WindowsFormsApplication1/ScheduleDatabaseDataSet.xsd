@@ -145,7 +145,7 @@ SELECT WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        WorkOrderID, Product, Customer, DueDate, CompletionDate, Quantity, Status, Notes
 FROM            WorkOrders
-WHERE        (Status = 'ARCHIVED')</CommandText>
+WHERE        (Status LIKE 'ARCHIVED%')</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -221,7 +221,7 @@ WHERE        (WorkOrderID = @Original_WorkOrderID)</CommandText>
   <xs:element name="ScheduleDatabaseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ScheduleDatabaseDataSet" msprop:Generator_UserDSName="ScheduleDatabaseDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Lines" msprop:Generator_TableClassName="LinesDataTable" msprop:Generator_TableVarName="tableLines" msprop:Generator_RowChangedName="LinesRowChanged" msprop:Generator_TablePropName="Lines" msprop:Generator_RowDeletingName="LinesRowDeleting" msprop:Generator_RowChangingName="LinesRowChanging" msprop:Generator_RowEvHandlerName="LinesRowChangeEventHandler" msprop:Generator_RowDeletedName="LinesRowDeleted" msprop:Generator_RowClassName="LinesRow" msprop:Generator_UserTableName="Lines" msprop:Generator_RowEvArgName="LinesRowChangeEvent">
+        <xs:element name="Lines" msprop:Generator_TableClassName="LinesDataTable" msprop:Generator_TableVarName="tableLines" msprop:Generator_TablePropName="Lines" msprop:Generator_RowDeletingName="LinesRowDeleting" msprop:Generator_RowChangingName="LinesRowChanging" msprop:Generator_RowEvHandlerName="LinesRowChangeEventHandler" msprop:Generator_RowDeletedName="LinesRowDeleted" msprop:Generator_UserTableName="Lines" msprop:Generator_RowChangedName="LinesRowChanged" msprop:Generator_RowEvArgName="LinesRowChangeEvent" msprop:Generator_RowClassName="LinesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ProdLineID" msprop:Generator_ColumnVarNameInTable="columnProdLineID" msprop:Generator_ColumnPropNameInRow="ProdLineID" msprop:Generator_ColumnPropNameInTable="ProdLineIDColumn" msprop:Generator_UserColumnName="ProdLineID" type="xs:int" />
@@ -235,7 +235,7 @@ WHERE        (WorkOrderID = @Original_WorkOrderID)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WorkOrders" msprop:Generator_TableClassName="WorkOrdersDataTable" msprop:Generator_TableVarName="tableWorkOrders" msprop:Generator_RowChangedName="WorkOrdersRowChanged" msprop:Generator_TablePropName="WorkOrders" msprop:Generator_RowDeletingName="WorkOrdersRowDeleting" msprop:Generator_RowChangingName="WorkOrdersRowChanging" msprop:Generator_RowEvHandlerName="WorkOrdersRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkOrdersRowDeleted" msprop:Generator_RowClassName="WorkOrdersRow" msprop:Generator_UserTableName="WorkOrders" msprop:Generator_RowEvArgName="WorkOrdersRowChangeEvent">
+        <xs:element name="WorkOrders" msprop:Generator_TableClassName="WorkOrdersDataTable" msprop:Generator_TableVarName="tableWorkOrders" msprop:Generator_TablePropName="WorkOrders" msprop:Generator_RowDeletingName="WorkOrdersRowDeleting" msprop:Generator_RowChangingName="WorkOrdersRowChanging" msprop:Generator_RowEvHandlerName="WorkOrdersRowChangeEventHandler" msprop:Generator_RowDeletedName="WorkOrdersRowDeleted" msprop:Generator_UserTableName="WorkOrders" msprop:Generator_RowChangedName="WorkOrdersRowChanged" msprop:Generator_RowEvArgName="WorkOrdersRowChangeEvent" msprop:Generator_RowClassName="WorkOrdersRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="WorkOrderID" msprop:Generator_ColumnVarNameInTable="columnWorkOrderID" msprop:Generator_ColumnPropNameInRow="WorkOrderID" msprop:Generator_ColumnPropNameInTable="WorkOrderIDColumn" msprop:Generator_UserColumnName="WorkOrderID" type="xs:int" />

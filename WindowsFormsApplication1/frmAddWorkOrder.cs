@@ -41,12 +41,18 @@ namespace WindowsFormsApplication1
             newRegionRow.Quantity = quantity;
             newRegionRow.Status = "Unallocated";
 
-            // Add the row to the Region table 
-            this.scheduleDatabaseDataSet.WorkOrders.Rows.Add(newRegionRow);
-
-            // Save the new row to the database 
-            this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
-            MessageBox.Show("Work Order submitted! Close the form to see new orders.");
+            // Add the row to the Region table
+            try
+            {
+                this.scheduleDatabaseDataSet.WorkOrders.Rows.Add(newRegionRow);
+                // Save the new row to the database 
+                this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
+                MessageBox.Show("Work Order submitted! Close the form to see new orders.");
+            }
+            catch
+            {
+                MessageBox.Show("There was a problem adding this order to the system! This is probably due to the works order ID already existing.");
+            }
         }
     }
 }

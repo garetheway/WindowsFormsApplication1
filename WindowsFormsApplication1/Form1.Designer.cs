@@ -35,20 +35,24 @@
             this.scheduleDatabaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.workOrdersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.workOrdersTableAdapter = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter();
-            this.tableAdapterManager = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager();
             this.lblSwinprod = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnArchive = new System.Windows.Forms.Button();
             this.btnRunSchedule = new System.Windows.Forms.Button();
             this.pnlUnallocated = new System.Windows.Forms.Panel();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.pnlLine2 = new System.Windows.Forms.Panel();
             this.pnlLine1 = new System.Windows.Forms.Panel();
+            this.linesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.linesTableAdapter = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.LinesTableAdapter();
+            this.tableAdapterManager = new WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scheduleDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workOrdersBindingSource)).BeginInit();
             this.panelTop.SuspendLayout();
             this.pnlBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.linesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblProdLine1
@@ -95,13 +99,6 @@
             // 
             this.workOrdersTableAdapter.ClearBeforeFill = true;
             // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.LinesTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.WorkOrdersTableAdapter = this.workOrdersTableAdapter;
-            // 
             // lblSwinprod
             // 
             this.lblSwinprod.AutoSize = true;
@@ -116,6 +113,7 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.btnArchive);
             this.panelTop.Controls.Add(this.btnRunSchedule);
             this.panelTop.Controls.Add(this.pnlUnallocated);
             this.panelTop.Controls.Add(this.btnAddNew);
@@ -123,6 +121,18 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1935, 164);
             this.panelTop.TabIndex = 6;
+            // 
+            // btnArchive
+            // 
+            this.btnArchive.BackColor = System.Drawing.Color.White;
+            this.btnArchive.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArchive.Location = new System.Drawing.Point(1752, 5);
+            this.btnArchive.Name = "btnArchive";
+            this.btnArchive.Size = new System.Drawing.Size(123, 30);
+            this.btnArchive.TabIndex = 3;
+            this.btnArchive.Text = "Archive";
+            this.btnArchive.UseVisualStyleBackColor = false;
+            this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
             // btnRunSchedule
             // 
@@ -170,7 +180,7 @@
             // 
             this.pnlLine2.Location = new System.Drawing.Point(12, 160);
             this.pnlLine2.Name = "pnlLine2";
-            this.pnlLine2.Size = new System.Drawing.Size(1880, 100);
+            this.pnlLine2.Size = new System.Drawing.Size(1880, 277);
             this.pnlLine2.TabIndex = 1;
             // 
             // pnlLine1
@@ -180,11 +190,28 @@
             this.pnlLine1.Size = new System.Drawing.Size(1880, 100);
             this.pnlLine1.TabIndex = 0;
             // 
+            // linesBindingSource
+            // 
+            this.linesBindingSource.DataMember = "Lines";
+            this.linesBindingSource.DataSource = this.scheduleDatabaseDataSet;
+            // 
+            // linesTableAdapter
+            // 
+            this.linesTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.LinesTableAdapter = this.linesTableAdapter;
+            this.tableAdapterManager.UpdateOrder = WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.WorkOrdersTableAdapter = this.workOrdersTableAdapter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1042);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1952, 1062);
             this.Controls.Add(this.lblSwinprod);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.panelTop);
@@ -197,6 +224,7 @@
             this.panelTop.ResumeLayout(false);
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.linesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,7 +238,6 @@
         private ScheduleDatabaseDataSet scheduleDatabaseDataSet;
         private System.Windows.Forms.BindingSource workOrdersBindingSource;
         private ScheduleDatabaseDataSetTableAdapters.WorkOrdersTableAdapter workOrdersTableAdapter;
-        private ScheduleDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.Label lblSwinprod;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button btnAddNew;
@@ -219,6 +246,10 @@
         private System.Windows.Forms.Panel pnlLine2;
         private System.Windows.Forms.Panel pnlUnallocated;
         private System.Windows.Forms.Button btnRunSchedule;
+        private System.Windows.Forms.Button btnArchive;
+        private System.Windows.Forms.BindingSource linesBindingSource;
+        private ScheduleDatabaseDataSetTableAdapters.LinesTableAdapter linesTableAdapter;
+        private ScheduleDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager;
 
 
 

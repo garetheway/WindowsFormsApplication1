@@ -11,3 +11,5 @@ C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\Wind
 C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
 C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
 C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.frmUnallocatedOrderDetail.resources
+C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.frmScheduleOrderDetail.resources
+C:\Users\GWAY\Documents\Work\University\YEAR THREE\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.frmArchive.resources

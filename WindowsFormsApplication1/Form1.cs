@@ -10,15 +10,16 @@ using System.Windows;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.Forms.MessageBox;
+using WindowsFormsApplication1.ScheduleDatabaseDataSetTableAdapters;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
         // Create a new object of our new work order form.
-        frmAddWorkOrder newwrkorderFrm = new frmAddWorkOrder();
         // Number of generations that our GA is going to run.
         public int numberOfGens = 5000;
+        frmAddWorkOrder newwrkorderFrm = new frmAddWorkOrder();
         // Create objects of these. Had to be done for one function (a button click) annoyingly...
         public Population popp;
         public WorkOrderCollection worky;
@@ -26,6 +27,8 @@ namespace WindowsFormsApplication1
         // Events that occur when the form is first loaded.
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'scheduleDatabaseDataSet.Lines' table. You can move, or remove it, as needed.
+            this.linesTableAdapter.Fill(this.scheduleDatabaseDataSet.Lines);
             // Fill our table adapter with information from the database.
             this.workOrdersTableAdapter.Fill(this.scheduleDatabaseDataSet.WorkOrders);
             // Update the colours of the background panels.
@@ -52,8 +55,7 @@ namespace WindowsFormsApplication1
 
             // Set up the unallocated orders.
             LoadUnallocated(pop, workOrders);
-            // Set up the production lines!
-            LoadSchedule(pop, workOrders);
+            SetSchedule(pop, workOrders);
 
             workOrders.AssociateArchivedOrders();
 
@@ -129,10 +131,7 @@ namespace WindowsFormsApplication1
         {
            // Create our table adapter to interact with the database.
             this.workOrdersTableAdapter.Fill(this.scheduleDatabaseDataSet.WorkOrders);
-
-            // Create lists for each of the production lines.
-            List<TextBox> prodLine1 = new List<TextBox>();
-            List<TextBox> prodLine2 = new List<TextBox>();
+            this.linesTableAdapter.Fill(this.scheduleDatabaseDataSet.Lines);
 
             // Clear any existing data from the orders list.
             workOrders.orders.Clear();
@@ -179,6 +178,32 @@ namespace WindowsFormsApplication1
                 workorderrow.CompletionDate = cd;
                 this.workOrdersTableAdapter.Update(this.scheduleDatabaseDataSet.WorkOrders);
             }
+            
+            /* SAVE THE LINE MAKEUP TO THE DATABASE*/
+            string line1 = string.Join(",", pop.ProdLine1);
+            ScheduleDatabaseDataSet.LinesRow linerow1;
+            linerow1 = scheduleDatabaseDataSet.Lines.FindByProdLineID(1);
+            linerow1.LineSchedule = line1;
+            string line2 = string.Join(",", pop.ProdLine2);
+            ScheduleDatabaseDataSet.LinesRow linerow2;
+            linerow2 = scheduleDatabaseDataSet.Lines.FindByProdLineID(2);
+            linerow2.LineSchedule = line2;
+            this.linesTableAdapter.Update(this.scheduleDatabaseDataSet.Lines);
+
+            SetSchedule(pop, workOrders);
+        }
+
+        private void SetSchedule (Population pop, WorkOrderCollection workOrders)
+        {
+            List<TextBox> prodLine1 = new List<TextBox>();
+            List<TextBox> prodLine2 = new List<TextBox>();
+            workOrders.AssociateWorkOrders();
+
+            ScheduleDatabaseDataSet.LinesRow linerow1;
+            this.linesTableAdapter.Fill(this.scheduleDatabaseDataSet.Lines);
+            linerow1 = scheduleDatabaseDataSet.Lines.FindByProdLineID(1);
+            string line1DB = linerow1.LineSchedule;
+            pop.ProdLine1 = line1DB.Split(',').Select(int.Parse).ToList();
 
             /*SET UP THE PRODUCTION LINE TEXT BOXES AND POPULATE*/
             // SET UP PRODUCTION LINE 1.
@@ -186,19 +211,25 @@ namespace WindowsFormsApplication1
             {
                 prodLine1.Add(new TextBox());
                 prodLine1[i].Name = "PONE" + i;
-                prodLine1[i].Location = new System.Drawing.Point(i*155);
+                prodLine1[i].Location = new System.Drawing.Point(i * 155);
                 prodLine1[i].Size = new System.Drawing.Size(150, 90);
                 prodLine1[i].Multiline = true;
                 prodLine1[i].ReadOnly = true;
                 prodLine1[i].Click += (sender, e) => AllocatedWorkOrderClick(sender, e, pop, workOrders);
                 pnlLine1.Controls.Add(prodLine1[i]);
             }
+
+            ScheduleDatabaseDataSet.LinesRow linerow2;
+            linerow2 = scheduleDatabaseDataSet.Lines.FindByProdLineID(2);
+            string line2DB = linerow2.LineSchedule;
+            pop.ProdLine2 = line2DB.Split(',').Select(int.Parse).ToList();
+
             // SET UP PRODUCTION LINE 2
             for (int i = 0; i < pop.ProdLine2.Count; i++)
             {
                 prodLine2.Add(new TextBox());
                 prodLine2[i].Name = "PTWO" + i;
-                prodLine2[i].Location = new System.Drawing.Point(i*155);
+                prodLine2[i].Location = new System.Drawing.Point(i * 155);
                 prodLine2[i].Size = new System.Drawing.Size(150, 90);
                 prodLine2[i].Multiline = true;
                 prodLine2[i].ReadOnly = true;
@@ -323,6 +354,7 @@ namespace WindowsFormsApplication1
         {
             TextBox textBox = (TextBox)sender;
             int prearchive = workOrders.archived.Count();
+            workOrders.archived.Clear();
             workOrders.orders.Clear();
             workOrders.AssociateWorkOrders();
             workOrders.AssociateArchivedOrders();
@@ -378,6 +410,12 @@ namespace WindowsFormsApplication1
         private void btnAddNew_Leave(object sender, EventArgs e)
         {
             btnAddNew.BackColor = Color.White;
+        }
+
+        private void btnArchive_Click(object sender, EventArgs e)
+        {
+            frmArchiveView newarchiveview = new frmArchiveView();
+            newarchiveview.Show();
         }
     }
 }
